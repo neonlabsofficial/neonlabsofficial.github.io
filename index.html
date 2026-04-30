@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neon Byte | Media</title>
-    <!-- Essential for the heart icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="main-wrapper">
-        <!-- GALLERY SECTION -->
+        <!-- TOP GALLERY SECTION -->
         <div class="image-box">
             <img id="mainImage" src="img1.png" alt="Neon Byte">
+            <!-- Pinned counter inside the relative box -->
             <div class="heart-container" onclick="likeImage()">
                 <span id="imageHeartIcon"><i class="far fa-heart"></i></span>
                 <span id="imageHeartCount">0</span>
@@ -36,9 +36,7 @@
                         </div>
                         <div class="player-controls-group">
                             <button class="player-control-btn" id="playBtn" onclick="togglePlay()">▶</button>
-                            <button class="player-mini-btn" onclick="downloadTrack()">
-                                <i class="fas fa-download"></i>
-                            </button>
+                            <button class="player-mini-btn" onclick="downloadTrack()"><i class="fas fa-download"></i></button>
                         </div>
                     </div>
 
@@ -55,8 +53,10 @@
                 </div>
             </div>
 
+            <!-- PLAYLIST SECTION -->
             <div class="playlist-section">
                 <div class="playlist-item">
+                    <!-- Fixed-size thumbnail -->
                     <img class="p-thumb" src="img1.png" alt="thumb">
                     <div class="p-row-content">
                         <span class="p-title">dream.exe</span>
