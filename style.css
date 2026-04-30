@@ -90,3 +90,7 @@ body {
 .songs {
     padding: 20px;
 }
+.fade-out {
+    opacity: 0;
+    transform: scale(1.02);
+}
