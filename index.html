@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neon Byte | Dashboard</title>
+    <title>Neon Byte | Media Portal</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* --- 1. CSS: LAYOUT & ANIMATION --- */
+        /* --- GLOBAL SETUP --- */
         * { box-sizing: border-box; }
         body {
             background-color: #05000a;
@@ -17,60 +17,73 @@
             padding: 20px;
             margin: 0;
         }
-
         .main-wrapper { width: 100%; max-width: 800px; }
 
-        /* --- THE SCROLLING GALLERY --- */
+        /* --- FADE GALLERY SYSTEM --- */
         .gallery-container {
             position: relative;
             width: 100%;
+            height: 450px; /* Adjust height based on your landscape preference */
             margin-bottom: 25px;
-            overflow: hidden; /* Clips the images */
+            background: #000;
             border-radius: 15px;
+            overflow: hidden;
         }
 
-        .slider-wrapper {
-            display: flex;
-            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        .fade-wrapper {
+            position: relative;
             width: 100%;
+            height: 100%;
         }
 
         .slide {
-            min-width: 100%; /* Each image takes full width */
-            flex-shrink: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.2s ease-in-out; /* Expert fade timing */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide.active {
+            opacity: 1;
         }
 
         .slide img {
-            width: 100%;
-            display: block;
-            object-fit: cover;
-            aspect-ratio: 16 / 9; /* Ensures landscape orientation as requested */
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain; /* Ensures images are displayed in full without cropping */
         }
 
-        /* NAVIGATION ARROWS */
+        /* NAVIGATION */
         .nav-arrow {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(0,0,0,0.5);
+            background: rgba(255, 0, 255, 0.2);
             color: #fff;
-            border: none;
-            padding: 10px 15px;
+            border: 1px solid rgba(255, 0, 255, 0.5);
+            padding: 12px 18px;
             cursor: pointer;
-            z-index: 10;
+            z-index: 20;
             border-radius: 50%;
-            transition: background 0.3s;
+            transition: 0.3s;
+            backdrop-filter: blur(5px);
         }
-        .nav-arrow:hover { background: #ff00ff; }
-        .prev-btn { left: 10px; }
-        .next-btn { right: 10px; }
+        .nav-arrow:hover { background: #ff00ff; box-shadow: 0 0 15px #ff00ff; }
+        .prev-btn { left: 15px; }
+        .next-btn { right: 15px; }
 
-        /* PINNED HEART ON GALLERY */
+        /* PINNED HEART COUNTER */
         .heart-container {
             position: absolute;
             bottom: 20px;
             right: 20px;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.8);
             padding: 8px 16px;
             border-radius: 25px;
             border: 1.5px solid #444;
@@ -78,12 +91,12 @@
             align-items: center;
             gap: 10px;
             color: #888;
-            z-index: 15;
+            z-index: 30;
             cursor: pointer;
             transition: all 0.3s;
         }
 
-        /* PLAYER & PLAYLIST */
+        /* PLAYER WIDGET (HORIZONTAL ALIGNMENT) */
         .player-widget {
             background: #11001a;
             border: 1px solid #222;
@@ -104,7 +117,7 @@
         }
 
         .track-meta { flex: 1; }
-        .status-label { font-size: 11px; color: #ff00ff; text-transform: uppercase; }
+        .status-label { font-size: 10px; color: #ff00ff; text-transform: uppercase; letter-spacing: 1.5px; }
         .track-name { font-weight: bold; font-size: 22px; margin: 4px 0; }
 
         .button-group { display: flex; gap: 12px; }
@@ -130,7 +143,7 @@
             font-size: 13px; color: #777; margin-top: 8px; font-family: monospace;
         }
 
-        /* PLAYLIST FIX */
+        /* PLAYLIST THUMBNAILS (FIXED SMALL) */
         .playlist-row {
             display: flex; align-items: center; gap: 15px;
             padding-top: 15px; border-top: 1px solid #222;
@@ -142,10 +155,10 @@
         .p-info { flex: 1; }
         .p-stats {
             font-size: 14px; min-width: 80px; text-align: right; color: #888;
-            cursor: pointer;
+            cursor: pointer; transition: 0.3s;
         }
 
-        /* THE PURPLE "LIT" STATE */
+        /* LIGHT-UP STATE */
         .liked {
             color: #ff00ff !important;
             border-color: #ff00ff !important;
@@ -156,20 +169,22 @@
 <body>
 
 <div class="main-wrapper">
-    <!-- 2. HTML: THE GALLERY & PLAYER -->
+    <!-- FADE GALLERY (5 IMAGES) -->
     <div class="gallery-container">
-        <button class="nav-arrow prev-btn" onclick="moveSlide(-1)">❮</button>
-        <button class="nav-arrow next-btn" onclick="moveSlide(1)">❯</button>
+        <button class="nav-arrow prev-btn" onclick="changeSlide(-1)">❮</button>
+        <button class="nav-arrow next-btn" onclick="changeSlide(1)">❯</button>
         
-        <div class="slider-wrapper" id="slider">
-            <div class="slide"><img src="img1.png" alt="Neon Byte 1"></div>
-            <div class="slide"><img src="img2.png" alt="Neon Byte 2"></div>
-            <div class="slide"><img src="img3.png" alt="Neon Byte 3"></div>
+        <div class="fade-wrapper" id="gallery">
+            <div class="slide active"><img src="img1.png"></div>
+            <div class="slide"><img src="img2.png"></div>
+            <div class="slide"><img src="img3.png"></div>
+            <div class="slide"><img src="img4.png"></div>
+            <div class="slide"><img src="img5.png"></div>
         </div>
 
-        <div class="heart-container" onclick="toggleLike(this, 'main')">
+        <div class="heart-container" onclick="toggleLike(this)">
             <i class="far fa-heart"></i>
-            <span id="mainCount">1149</span>
+            <span id="mainCount">1,149</span>
         </div>
     </div>
 
@@ -203,8 +218,8 @@
                 <div class="p-title">dream.exe</div>
                 <div style="font-size: 12px; color: #666;">Neon Byte</div>
             </div>
-            <div class="p-stats" onclick="toggleLike(this, 'playlist')">
-                <i class="far fa-heart"></i> <span id="playlistCount">1175</span>
+            <div class="p-stats" onclick="toggleLike(this)">
+                <i class="far fa-heart"></i> <span>1,175</span>
             </div>
         </div>
     </div>
@@ -212,22 +227,21 @@
 
 <audio id="audio" src="dream.exe.mp3"></audio>
 
-<!-- 3. JAVASCRIPT: THE ALIGNED LOGIC -->
 <script>
-    /* SLIDER LOGIC */
-    let currentSlide = 0;
-    const slider = document.getElementById('slider');
-    const totalSlides = document.querySelectorAll('.slide').length;
+    /* 1. FADE GALLERY LOGIC */
+    let slideIndex = 0;
+    const slides = document.querySelectorAll('.slide');
 
-    function moveSlide(direction) {
-        currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
-        slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+    function changeSlide(n) {
+        slides[slideIndex].classList.remove('active');
+        slideIndex = (slideIndex + n + slides.length) % slides.length;
+        slides[slideIndex].classList.add('active');
     }
 
-    // Auto-scroll every 5 seconds
-    setInterval(() => moveSlide(1), 5000);
+    // Auto-fade every 6 seconds
+    setInterval(() => changeSlide(1), 6000);
 
-    /* AUDIO LOGIC */
+    /* 2. PLAYER LOGIC */
     const audio = document.getElementById('audio');
     const playBtn = document.getElementById('playBtn');
     const progressBar = document.getElementById('progressBar');
@@ -267,8 +281,8 @@
         audio.currentTime = (e.offsetX / width) * audio.duration;
     }
 
-    /* LIKE LOGIC (PURPLE LIGHT-UP) */
-    function toggleLike(element, type) {
+    /* 3. LIKE SYSTEM (PURPLE LIGHT-UP) */
+    function toggleLike(element) {
         const icon = element.querySelector('i');
         const countSpan = element.querySelector('span');
         let count = parseInt(countSpan.innerText.replace(',', ''));
