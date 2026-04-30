@@ -23,12 +23,37 @@
     </div>
 
     <!-- MUSIC -->
-    <div class="songs">
-        <audio controls src="dream.exe.mp3"></audio>
+   <div class="music-player">
+
+    <!-- LEFT: ICON -->
+    <img class="track-icon" src="img1.png">
+
+    <!-- MIDDLE: INFO -->
+    <div class="track-info">
+        <div class="track-title">dream.exe</div>
+        <div class="track-artist">Neon Labs</div>
+
+        <!-- WAVEFORM -->
+        <div class="waveform">
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+        </div>
+
+        <!-- PROGRESS -->
+        <div class="progress">
+            <div class="progress-bar"></div>
+        </div>
     </div>
 
-</div>
+    <!-- RIGHT CONTROLS -->
+    <div class="controls">
+        <button onclick="togglePlay()" id="playBtn">▶</button>
+        <button onclick="downloadTrack()">⬇</button>
+    </div>
 
+    <audio id="audio" src="dream.exe.mp3"></audio>
+</div>
+    
 <script src="script.js"></script>
 </body>
 </html>
