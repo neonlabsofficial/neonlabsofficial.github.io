@@ -5,7 +5,6 @@ const mainImage = document.getElementById("mainImage");
 const images = ["img1.png", "img2.png", "img3.png", "img4.png", "img5.png"];
 let index = 0;
 
-// FIXED DATA
 const manualStartingPoints = {
     "img1.png": 1142, "img2.png": 1085, "img3.png": 1197, 
     "img4.png": 1023, "img5.png": 1115, "song_dream.exe": 1168
@@ -18,7 +17,6 @@ function getLikes(key, start) {
 
 function hasLiked(id) { return localStorage.getItem(`voted_${id}`) === "true"; }
 
-// LIKES LOGIC
 function likeImage() {
     const img = images[index];
     if (hasLiked(img)) return;
@@ -44,7 +42,6 @@ function updateUI() {
     document.getElementById("imageHeartIcon").innerHTML = hasLiked(img) ? '<i class="fas fa-heart liked"></i>' : '<i class="far fa-heart"></i>';
 }
 
-// VISUALIZER (HIGH SENSITIVITY)
 const barCount = 50;
 for(let i=0; i<barCount; i++) visualizer.appendChild(document.createElement("span"));
 const bars = visualizer.querySelectorAll("span");
@@ -52,7 +49,7 @@ const bars = visualizer.querySelectorAll("span");
 let context, analyser, src, array;
 function togglePlay() {
     if (!context) {
-        context = new AudioContext();
+        context = new (window.AudioContext || window.webkitAudioContext)();
         analyser = context.createAnalyser();
         src = context.createMediaElementSource(audio);
         src.connect(analyser);
@@ -68,22 +65,22 @@ function loop() {
     requestAnimationFrame(loop);
     analyser.getByteFrequencyData(array);
     bars.forEach((b, i) => {
-        let h = Math.pow(array[i]/255, 1.2) * 80;
+        let h = Math.pow(array[i]/255, 1.2) * 85; 
         b.style.height = `${Math.max(3, h)}px`;
     });
 }
 
-// DOWNLOAD
 async function downloadTrack() {
-    const res = await fetch(audio.src);
-    const blob = await res.blob();
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url; a.download = "dream_exe.mp3";
-    a.click();
+    try {
+        const res = await fetch(audio.src);
+        const blob = await res.blob();
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url; a.download = "dream_exe.mp3";
+        a.click();
+    } catch(e) { window.open(audio.src, '_blank'); }
 }
 
-// SLIDESHOW
 setInterval(() => {
     index = (index + 1) % images.length;
     mainImage.style.opacity = 0;
