@@ -1,103 +1,143 @@
+/* GLOBAL RESET */
+* { box-sizing: border-box; }
 body {
     background-color: #05000a;
     color: #fff;
-    font-family: sans-serif;
+    font-family: 'Segoe UI', Roboto, sans-serif;
     margin: 0;
     display: flex;
     justify-content: center;
+    padding: 20px;
 }
 
 .main-wrapper {
     width: 100%;
-    max-width: 900px;
-    padding: 20px;
+    max-width: 800px;
 }
 
-/* TOP IMAGE & PINNED COUNTER */
+/* TOP IMAGE & PINNED HEART */
 .image-box {
     position: relative;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 #mainImage {
     width: 100%;
-    border-radius: 15px;
+    border-radius: 12px;
     display: block;
 }
 
 .heart-container {
     position: absolute;
-    bottom: 20px;
-    right: 20px;
-    background: rgba(0, 0, 0, 0.7);
+    bottom: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.75);
     padding: 8px 15px;
     border-radius: 20px;
+    border: 1px solid #ff00ff;
     display: flex;
     align-items: center;
     gap: 8px;
-    border: 1px solid #ff00ff;
-    cursor: pointer;
-}
-
-/* PLAYER LAYOUT FIX */
-.player-widget {
-    background: #11001a;
-    border: 1px solid #333;
-    border-radius: 20px;
-    padding: 20px;
-}
-
-.now-playing-section {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-/* THE BOTTOM IMAGE FIX */
-.p-thumb {
-    width: 50px !important;
-    height: 50px !important;
-    object-fit: cover;
-    border-radius: 5px;
-    flex-shrink: 0; /* Prevents it from getting big */
-}
-
-/* THE COUNTER FIX (PINNED RIGHT) */
-.p-row-content {
-    display: flex;
-    flex: 1;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.song-heart-btn {
-    min-width: 80px; /* Keeps the counter from jumping */
-    text-align: right;
     color: #ff00ff;
 }
 
-/* VISUALIZER & PROGRESS BARS */
-.player-waveform { height: 30px; display: flex; align-items: flex-end; gap: 2px; margin: 10px 0; }
-.player-waveform span { flex: 1; background: #ff00ff; min-height: 2px; }
-
-.player-progress-track {
-    width: 100%;
-    height: 6px;
-    background: #222;
-    border-radius: 10px;
-    overflow: hidden;
-    position: relative;
+/* PLAYER WIDGET */
+.player-widget {
+    background: #11001a;
+    border: 1px solid #222;
+    border-radius: 15px;
+    padding: 20px;
 }
 
-.player-progress-bar-filled {
+.now-playing-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+#playerTrackThumb {
+    width: 65px;
+    height: 65px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.track-meta { flex: 1; }
+.status-label { font-size: 10px; color: #ff00ff; letter-spacing: 1px; margin-bottom: 4px; }
+.track-name { font-weight: bold; font-size: 18px; }
+.artist-name { color: #888; font-size: 14px; }
+
+/* HORIZONTAL BUTTONS */
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+
+.action-btn {
+    background: #ff00ff;
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* PROGRESS BAR */
+.progress-area { margin-bottom: 20px; }
+.progress-track {
+    width: 100%;
+    height: 6px;
+    background: #2a1436;
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+.progress-fill {
     width: 0%;
     height: 100%;
     background: #ff00ff;
+    box-shadow: 0 0 10px #ff00ff;
+}
+.time-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #666;
+    margin-top: 6px;
 }
 
-.player-progress-detailed {
+/* PLAYLIST - FIXED THUMBNAIL SIZE */
+.playlist-row {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #222;
+}
+
+.p-thumb {
+    width: 45px !important;
+    height: 45px !important;
+    border-radius: 4px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.p-info { flex: 1; }
+.p-title { display: block; font-size: 14px; }
+.p-artist { font-size: 12px; color: #666; }
+
+.p-stats {
+    color: #ff00ff;
+    font-size: 13px;
+    min-width: 60px;
+    text-align: right;
 }
