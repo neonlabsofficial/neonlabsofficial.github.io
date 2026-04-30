@@ -1,5 +1,5 @@
 let images = [
-   "img1.png",
+    "img1.png",
     "img2.png",
     "img3.png",
     "img4.png",
@@ -22,10 +22,9 @@ function nextImage() {
     showImage();
 }
 
-// Auto slideshow
 setInterval(nextImage, 4000);
 
-// LIKE SYSTEM
+// ❤️ LIKE SYSTEM
 function likeImage() {
     if (!likedState[index]) {
         likes[index]++;
@@ -56,9 +55,20 @@ function updateHeartUI() {
     }
 }
 
-// TEMP NEXT GROUP
+// 👉 RIGHT ARROW
 function nextGroup() {
-    document.body.innerHTML = "<h1 style='color:white; margin-top:40vh;'>Coming Soon</h1>";
+    document.body.innerHTML = `
+        <button class="nav-arrow left" onclick="goBack()">❮</button>
+
+        <div style="background:black; color:white; height:100vh; display:flex; justify-content:center; align-items:center;">
+            <h1 style="font-size:60px;">Coming Soon</h1>
+        </div>
+    `;
+}
+
+// 👉 LEFT ARROW
+function goBack() {
+    location.reload();
 }
 
 // INIT
