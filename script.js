@@ -86,3 +86,23 @@ function goBack() {
 
 // INIT
 showImage();
+
+function togglePlay() {
+    const audio = document.getElementById("audio");
+    const btn = document.getElementById("playBtn");
+
+    if (audio.paused) {
+        audio.play();
+        btn.textContent = "⏸";
+    } else {
+        audio.pause();
+        btn.textContent = "▶";
+    }
+}
+
+function downloadTrack() {
+    const link = document.createElement("a");
+    link.href = "dream.exe.mp3";
+    link.download = "dream.exe.mp3";
+    link.click();
+}
