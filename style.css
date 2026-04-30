@@ -1,64 +1,103 @@
-/* BUTTON STYLING */
-.player-controls-group {
+body {
+    background-color: #05000a;
+    color: #fff;
+    font-family: sans-serif;
+    margin: 0;
     display: flex;
-    gap: 10px;
+    justify-content: center;
 }
 
-.player-control-btn, .player-mini-btn {
-    background: #ff00ff;
-    border: none;
-    color: white;
-    padding: 8px 12px;
-    border-radius: 5px;
+.main-wrapper {
+    width: 100%;
+    max-width: 900px;
+    padding: 20px;
+}
+
+/* TOP IMAGE & PINNED COUNTER */
+.image-box {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+#mainImage {
+    width: 100%;
+    border-radius: 15px;
+    display: block;
+}
+
+.heart-container {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 8px 15px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid #ff00ff;
     cursor: pointer;
-    font-weight: bold;
-    transition: 0.2s;
 }
 
-.player-control-btn:hover, .player-mini-btn:hover {
-    background: #bc00bc;
-    transform: scale(1.05);
+/* PLAYER LAYOUT FIX */
+.player-widget {
+    background: #11001a;
+    border: 1px solid #333;
+    border-radius: 20px;
+    padding: 20px;
 }
 
-/* PROGRESS BAR STYLING */
+.now-playing-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* THE BOTTOM IMAGE FIX */
+.p-thumb {
+    width: 50px !important;
+    height: 50px !important;
+    object-fit: cover;
+    border-radius: 5px;
+    flex-shrink: 0; /* Prevents it from getting big */
+}
+
+/* THE COUNTER FIX (PINNED RIGHT) */
+.p-row-content {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.song-heart-btn {
+    min-width: 80px; /* Keeps the counter from jumping */
+    text-align: right;
+    color: #ff00ff;
+}
+
+/* VISUALIZER & PROGRESS BARS */
+.player-waveform { height: 30px; display: flex; align-items: flex-end; gap: 2px; margin: 10px 0; }
+.player-waveform span { flex: 1; background: #ff00ff; min-height: 2px; }
+
 .player-progress-track {
     width: 100%;
     height: 6px;
-    background: #331a40;
+    background: #222;
     border-radius: 10px;
-    margin: 10px 0;
-    cursor: pointer;
-    position: relative;
     overflow: hidden;
+    position: relative;
 }
 
 .player-progress-bar-filled {
-    width: 0%; /* JS will update this */
+    width: 0%;
     height: 100%;
     background: #ff00ff;
-    box-shadow: 0 0 10px #ff00ff;
 }
 
 .player-progress-detailed {
     display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    color: #aaa;
-    font-family: monospace;
-}
-
-/* VISUALIZER STYLING */
-.player-waveform {
-    height: 30px;
-    display: flex;
-    align-items: flex-end;
-    gap: 2px;
-    margin-bottom: 10px;
-}
-
-.visualizer-bar {
-    flex: 1;
-    background: #ff00ff;
-    min-height: 2px;
-    transition: height 0.05s ease;
+    align-items: center;
+    gap: 10px;
 }
