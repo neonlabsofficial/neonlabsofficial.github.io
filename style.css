@@ -33,17 +33,27 @@ body {
     right: 20px;
 }
 
-/* IMAGE */
+/* IMAGE CONTAINER */
 .image-box {
     position: relative;
     width: 100%;
     height: 80vh;
+    overflow: hidden; /* keeps layout clean for all normal images */
 }
 
+/* DEFAULT IMAGES (all except first) */
 .image-box img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+/* ⭐ SPECIAL FIX: FIRST IMAGE ONLY */
+.image-box:first-of-type img {
+    object-fit: contain;      /* shows full image */
+    transform: scale(1.05);   /* slight zoom so it doesn’t look small */
+    position: relative;
+    z-index: 2;
 }
 
 /* HEART */
@@ -66,9 +76,4 @@ body {
 /* MUSIC */
 .songs {
     padding: 20px;
-}
-.scroll-item:first-child img {
-  position: relative;
-  z-index: 2;
-  transform: scale(1.08);
 }
