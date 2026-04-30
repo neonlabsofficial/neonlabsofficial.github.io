@@ -1,89 +1,69 @@
-/* Center everything on the screen */
+/* Center the whole project */
 body {
     background-color: #05000a;
-    color: #fff;
-    font-family: 'Segoe UI', sans-serif;
     margin: 0;
     display: flex;
-    justify-content: center; /* Centers horizontally */
-    min-height: 100vh;
+    justify-content: center;
+    color: #fff;
+    font-family: sans-serif;
 }
 
 .main-wrapper {
     width: 100%;
-    max-width: 900px; /* Keeps the site from getting too wide */
+    max-width: 900px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 20px;
 }
 
-/* TOP GALLERY - Fixed height to prevent jumping */
+/* TOP IMAGE BOX */
 .image-box {
-    position: relative; 
+    position: relative;
     width: 100%;
-    height: 500px; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 30px;
-    background: #000;
-    border-radius: 20px;
-    overflow: hidden;
+    margin-bottom: 20px;
 }
 
 #mainImage {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
+    width: 100%;
+    border-radius: 15px;
+    display: block;
 }
 
-/* PINNED COUNTER - Stays in one spot */
-.heart-container {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 10px 15px;
-    border-radius: 30px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    border: 1px solid #ff00ff;
-    z-index: 10;
-}
-
-/* BOTTOM IMAGE - Strict size fix */
+/* THE FIX: Lock the bottom thumbnail size */
 .p-thumb {
     width: 50px !important;
     height: 50px !important;
-    min-width: 50px;
-    object-fit: cover;
-    border-radius: 8px;
-    flex-shrink: 0;
+    min-width: 50px !important;
+    max-width: 50px !important;
+    object-fit: cover !important;
+    border-radius: 5px;
 }
 
-/* PLAYER LAYOUT */
+/* FIX MUSIC PLAYER LAYOUT */
 .player-widget {
-    width: 100%;
-    background: rgba(20, 0, 30, 0.95);
-    border-radius: 30px;
-    padding: 25px;
-    border: 1px solid rgba(255, 0, 255, 0.2);
+    background: #1a0026;
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid #ff00ff;
 }
 
 .playlist-item {
-    display: flex;
+    display: flex !important; /* Forces horizontal alignment */
     align-items: center;
     gap: 15px;
-    padding: 10px;
+    margin-top: 10px;
 }
 
 .p-row-content {
     display: flex;
-    align-items: center;
     flex: 1;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.p-artist { margin-right: auto; color: #888; padding-left: 10px; }
+/* Fixes the Jumping Counter */
+.song-heart-btn {
+    min-width: 80px;
+    text-align: right;
+    color: #ff00ff;
+}
