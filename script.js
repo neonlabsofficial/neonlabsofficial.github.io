@@ -15,11 +15,11 @@ let likedState = JSON.parse(localStorage.getItem("liked")) || [false,false,false
 function showImage() {
     const img = document.getElementById("mainImage");
 
-    img.classList.add("fade");
+    img.classList.add("fade-out");
 
     setTimeout(() => {
         img.src = images[index];
-        img.classList.remove("fade");
+        img.classList.remove("fade-out");
         updateHeartUI();
     }, 150);
 }
@@ -27,7 +27,7 @@ function showImage() {
 function nextImage() {
     const img = document.getElementById("mainImage");
 
-    img.classList.add("fade");
+    img.classList.add("fade-out");
 
     setTimeout(() => {
         index = (index + 1) % images.length;
