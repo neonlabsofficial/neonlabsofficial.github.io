@@ -8,26 +8,23 @@
 
 <div class="container">
 
-    <div class="image-box">
-        <button class="arrow left" onclick="prevImage()">❮</button>
+    <!-- BIG SIDE ARROWS -->
+    <button class="nav-arrow left">❮</button>
+    <button class="nav-arrow right" onclick="nextGroup()">❯</button>
 
+    <!-- IMAGE -->
+    <div class="image-box">
         <img id="mainImage" src="img1.jpg">
 
-        <button class="arrow right" onclick="nextImage()">❯</button>
-
-        <div class="heart" onclick="likeImage()">♡</div>
+        <div class="heart-container" onclick="likeImage()">
+            <span id="heartIcon">♡</span>
+            <span id="heartCount">0</span>
+        </div>
     </div>
 
+    <!-- MUSIC PLAYER -->
     <div class="songs">
-        <h2>NEON BYTE</h2>
-
-        <div class="song">
-            <p>Dream.exe</p>
-            <audio controls src="dream.exe.mp3"></audio>
-            <br>
-            <a href="dream.exe.mp3" download>Download</a>
-        </div>
-
+        <audio controls src="dreamexe.mp3"></audio>
     </div>
 
 </div>
