@@ -47,12 +47,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            pointer-events: none; /* Prevents inactive slides from blocking clicks */
+            pointer-events: none;
         }
 
         .slide.active {
             opacity: 1;
-            pointer-events: auto; /* Only the visible slide is clickable */
+            pointer-events: auto;
         }
 
         .slide img {
@@ -172,45 +172,45 @@
 <body>
 
 <div class="main-wrapper">
-    <!-- FADE GALLERY WITH INDIVIDUAL COUNTERS -->
+    <!-- FADE GALLERY WITH CUSTOM INITIAL COUNTERS -->
     <div class="gallery-container">
         <button class="nav-arrow prev-btn" onclick="changeSlide(-1)">❮</button>
         <button class="nav-arrow next-btn" onclick="changeSlide(1)">❯</button>
         
         <div class="fade-wrapper">
-            <!-- SLIDE 1 -->
+            <!-- SLIDE 1 (img1.png) -->
             <div class="slide active">
                 <img src="img1.png">
                 <div class="heart-container" onclick="toggleLike(this)">
-                    <i class="far fa-heart"></i> <span>1,149</span>
+                    <i class="far fa-heart"></i> <span>1,876</span>
                 </div>
             </div>
-            <!-- SLIDE 2 -->
+            <!-- SLIDE 2 (img2.png) -->
             <div class="slide">
                 <img src="img2.png">
                 <div class="heart-container" onclick="toggleLike(this)">
-                    <i class="far fa-heart"></i> <span>850</span>
+                    <i class="far fa-heart"></i> <span>1,777</span>
                 </div>
             </div>
-            <!-- SLIDE 3 -->
+            <!-- SLIDE 3 (img3.png) -->
             <div class="slide">
                 <img src="img3.png">
                 <div class="heart-container" onclick="toggleLike(this)">
-                    <i class="far fa-heart"></i> <span>2,300</span>
+                    <i class="far fa-heart"></i> <span>1,773</span>
                 </div>
             </div>
-            <!-- SLIDE 4 -->
+            <!-- SLIDE 4 (img4.png) -->
             <div class="slide">
                 <img src="img4.png">
                 <div class="heart-container" onclick="toggleLike(this)">
-                    <i class="far fa-heart"></i> <span>920</span>
+                    <i class="far fa-heart"></i> <span>1,866</span>
                 </div>
             </div>
-            <!-- SLIDE 5 -->
+            <!-- SLIDE 5 (img5.png) -->
             <div class="slide">
                 <img src="img5.png">
                 <div class="heart-container" onclick="toggleLike(this)">
-                    <i class="far fa-heart"></i> <span>1,560</span>
+                    <i class="far fa-heart"></i> <span>1,792</span>
                 </div>
             </div>
         </div>
