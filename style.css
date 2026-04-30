@@ -1,43 +1,70 @@
-/* Layout Fixes */
+/* Player Controls */
 .player-controls-group {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
 }
 
 .player-mini-btn {
-    background: none;
-    border: 1px solid rgba(255, 0, 255, 0.5);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid #ff00ff;
     color: #ff00ff;
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     cursor: pointer;
-    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
 }
 
 .player-mini-btn:hover {
-    background: rgba(255, 0, 255, 0.1);
-    box-shadow: 0 0 10px #ff00ff;
+    background: #ff00ff;
+    color: #000;
+    box-shadow: 0 0 15px #ff00ff;
 }
 
-/* One-line Playlist Style */
+/* One-Line Playlist Logic */
+.playlist-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+}
+
 .p-row-content {
     display: flex;
     align-items: center;
-    width: 100%;
-    gap: 15px; /* Spacing between title, artist, duration, and likes */
+    flex: 1;
+    gap: 20px;
+    margin-left: 15px;
 }
 
-.p-artist { margin-right: auto; } /* Pushes duration and heart to the right */
+.p-title { font-weight: bold; white-space: nowrap; }
+.p-artist { color: #888; white-space: nowrap; }
 
-.p-duration { font-size: 0.9rem; min-width: 40px; }
+/* This pushes the time and heart to the far right */
+.p-duration { 
+    margin-left: auto; 
+    font-family: monospace;
+}
 
-/* Visualizer Bars */
+.song-heart-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 80px;
+    justify-content: flex-end;
+}
+
+/* Exaggerated Visualizer Bars */
 .player-waveform span {
     flex: 1;
     background: #ff00ff;
-    border-radius: 2px;
-    min-height: 3px;
-    box-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
+    min-height: 2px;
+    border-radius: 1px;
+    /* Keeps movement smooth but fast */
+    transition: height 0.04s ease-out; 
 }
