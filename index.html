@@ -1,82 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neon Labs | Media</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<!-- Inside the .image-box div -->
+<div class="heart-container" onclick="likeImage()">
+    <!-- Added id and font-awesome classes -->
+    <span id="imageHeartIcon"><i class="far fa-heart"></i></span>
+    <span id="imageHeartCount">0</span>
+</div>
 
-    <!-- NAV ARROWS -->
-    <button class="page-nav-arrow left" onclick="goBack()">❮</button>
-    <button class="page-nav-arrow right" onclick="nextGroup()">❯</button>
-
-    <div class="container">
-        <!-- LARGE UNCHOPPED GALLERY -->
-        <div class="image-box">
-            <img id="mainImage" src="img1.png" alt="Featured Art">
-            <div class="heart-container" onclick="likeImage()">
-                <span id="heartIcon">♡</span>
-                <span id="heartCount">0</span>
-            </div>
-        </div>
-
-        <!-- PLAYER WIDGET (Underneath) -->
-        <div class="player-widget">
-            <div class="now-playing-section">
-                <div class="track-thumb-container">
-                    <img id="playerTrackThumb" src="img1.png" alt="Thumbnail">
-                </div>
-
-                <div class="track-data-layout">
-                    <div class="track-data-top">
-                        <div class="track-info-titles">
-                            <span class="now-playing-indicator"><span class="purple-dot"></span> NOW PLAYING</span>
-                            <div class="player-track-title">dream.exe</div>
-                            <div class="player-track-artist">Neon Labs</div>
-                        </div>
-                        <button class="player-control-btn" id="playBtn" onclick="togglePlay()">▶</button>
-                    </div>
-
-                    <div class="waveform-progress-data">
-                        <!-- REAL-TIME SYNCED WAVEFORM -->
-                        <div class="player-waveform" id="visualizer"></div>
-
-                        <div class="player-progress-detailed">
-                            <span id="currentTime">0:00</span>
-                            <div class="player-progress-track" id="progressTrack">
-                                <div class="player-progress-bar-filled" id="progressBar"></div>
-                            </div>
-                            <span id="totalTime">0:00</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PLAYLIST SECTION -->
-            <div class="playlist-section">
-                <div class="playlist-header">
-                    <div class="download-trigger" onclick="downloadTrack()">
-                        <i class="fas fa-download"></i>
-                        <span>DOWNLOAD</span>
-                    </div>
-                </div>
-
-                <div class="playlist-item active-track">
-                    <!-- FIXED: Small thumbnail style applied here -->
-                    <img class="p-thumb" src="img1.png" alt="track thumb">
-                    <i class="fas fa-bars-staggered purple-track-icon"></i>
-                    <span class="p-title active-color">dream.exe</span>
-                    <span class="p-artist grey-color">Neon Labs</span>
-                    <span class="p-duration grey-color" id="playlistDuration">0:00</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <audio id="audio" src="dream.exe.mp3" crossorigin="anonymous"></audio>
-    <script src="script.js"></script>
-</body>
-</html>
+<!-- Inside the .playlist-item div -->
+<div class="song-heart-btn" onclick="likeSong('dream.exe')">
+    <!-- Added id for specific song tracking -->
+    <i class="far fa-heart" id="heart-dream.exe"></i>
+    <span id="count-dream.exe">0</span>
+</div>
