@@ -4,18 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neon Labs | Media</title>
-    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- NAVIGATION ARROWS -->
     <button class="page-nav-arrow left" onclick="goBack()">❮</button>
     <button class="page-nav-arrow right" onclick="nextGroup()">❯</button>
 
     <div class="container">
-        <!-- 1. IMAGE BOX (Top Section) -->
+        <!-- IMAGE BOX: Now larger and uncropped -->
         <div class="image-box">
             <img id="mainImage" src="img1.png" alt="Featured Art">
             <div class="heart-container" onclick="likeImage()">
@@ -24,7 +22,7 @@
             </div>
         </div>
 
-        <!-- 2. PLAYER WIDGET (Bottom Section) -->
+        <!-- PLAYER WIDGET -->
         <div class="player-widget">
             <div class="now-playing-section">
                 <div class="track-thumb-container">
@@ -42,8 +40,9 @@
                     </div>
 
                     <div class="waveform-progress-data">
-                        <div class="player-waveform">
-                            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                        <!-- SCRIPTED WAVEFORM -->
+                        <div class="player-waveform" id="visualizer">
+                            <!-- JS will generate bars here for better sync -->
                         </div>
 
                         <div class="player-progress-detailed">
@@ -76,7 +75,7 @@
         </div>
     </div>
 
-    <audio id="audio" src="dream.exe.mp3"></audio>
+    <audio id="audio" src="dream.exe.mp3" crossorigin="anonymous"></audio>
     <script src="script.js"></script>
 </body>
 </html>
