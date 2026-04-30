@@ -1,49 +1,48 @@
-/* HEART & LIKE STYLES */
-.heart-container, .song-heart-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-    user-select: none;
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background-color: #000; color: #fff; font-family: 'Segoe UI', sans-serif; overflow-x: hidden; }
+
+.container { display: flex; flex-direction: column; align-items: center; width: 100%; }
+
+/* LARGE GALLERY */
+.image-box {
+    position: relative; width: 100%; height: 80vh;
+    display: flex; justify-content: center; align-items: center; margin-bottom: 20px;
+}
+.image-box img { max-width: 95%; max-height: 95%; object-fit: contain; transition: opacity 0.4s ease; }
+.fade-out { opacity: 0; }
+
+/* PLAYER */
+.player-widget {
+    max-width: 800px; width: 90%; background: rgba(15, 0, 25, 0.9);
+    backdrop-filter: blur(25px); border: 1px solid rgba(255, 0, 255, 0.1);
+    border-radius: 35px; padding: 30px; margin-bottom: 60px;
 }
 
+.now-playing-section { display: flex; gap: 25px; margin-bottom: 25px; align-items: center; }
+.track-thumb-container { width: 120px; height: 120px; border-radius: 15px; overflow: hidden; flex-shrink: 0; }
+.track-thumb-container img { width: 100%; height: 100%; object-fit: cover; }
+.track-data-layout { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+
+/* VISUALIZER */
+.player-waveform { height: 40px; display: flex; align-items: center; gap: 3px; }
+.player-waveform span { flex: 1; background: #ff00ff; border-radius: 2px; min-height: 2px; transition: height 0.05s ease; }
+
+/* PROGRESS */
+.player-progress-track { flex: 1; height: 6px; background: rgba(255,255,255,0.1); border-radius: 10px; cursor: pointer; position: relative; margin: 10px 0; }
+.player-progress-bar-filled { height: 100%; width: 0%; background: #ff00ff; box-shadow: 0 0 10px #ff00ff; }
+
+/* HEARTS & LIKES */
+.heart-container, .song-heart-btn { display: flex; align-items: center; gap: 8px; cursor: pointer; transition: transform 0.2s; }
 .heart-container {
-    position: absolute;
-    bottom: 25px;
-    right: 40px;
-    background: rgba(0, 0, 0, 0.6);
-    padding: 10px 20px;
-    border-radius: 50px;
-    border: 1px solid rgba(255, 0, 255, 0.3);
-    font-size: 1.2rem;
-    min-width: 110px; /* Prevents jumping */
-    justify-content: center;
-    z-index: 10;
+    position: absolute; bottom: 25px; right: 40px; background: rgba(0,0,0,0.6);
+    padding: 10px 20px; border-radius: 50px; min-width: 110px; justify-content: center;
 }
+.song-heart-btn { margin-left: auto; min-width: 70px; color: #ff00ff; justify-content: flex-end; }
+.fa-heart.liked { color: #ff00ff; font-weight: 900; filter: drop-shadow(0 0 8px #ff00ff); }
 
-.song-heart-btn {
-    margin-left: auto;
-    font-size: 0.9rem;
-    color: #ff00ff;
-    min-width: 70px;
-}
-
-/* The pulse and glow when liked */
-.fa-heart.liked {
-    color: #ff00ff;
-    font-weight: 900; 
-    filter: drop-shadow(0 0 8px #ff00ff);
-}
-
-.heart-container:active, .song-heart-btn:active {
-    transform: scale(1.2);
-}
-
-/* Ensure the playlist text doesn't overlap hearts */
-.p-info {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    margin-right: 10px;
-}
+/* MISC UI */
+.p-thumb { width: 50px; height: 50px; border-radius: 8px; object-fit: cover; }
+.p-info { flex: 1; display: flex; flex-direction: column; margin-left: 15px; }
+.active-color { color: #ff00ff; font-weight: bold; }
+.player-control-btn { width: 65px; height: 65px; border-radius: 50%; border: 2px solid #ff00ff; background: none; color: #ff00ff; font-size: 24px; cursor: pointer; }
+.page-nav-arrow { position: fixed; top: 50%; font-size: 50px; color: #fff; opacity: 0.15; background: none; border: none; cursor: pointer; }
