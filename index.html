@@ -1,59 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neon Labs</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- SIDE ARROWS -->
-<button class="nav-arrow left" onclick="goBack()">❮</button>
-<button class="nav-arrow right" onclick="nextGroup()">❯</button>
+    <!-- SIDE ARROWS -->
+    <button class="nav-arrow left" onclick="goBack()">❮</button>
+    <button class="nav-arrow right" onclick="nextGroup()">❯</button>
 
-<div class="container">
+    <div class="container">
+        <!-- IMAGE -->
+        <div class="image-box">
+            <img id="mainImage" src="img1.png" alt="Cover Art">
 
-    <!-- IMAGE -->
-    <div class="image-box">
-        <img id="mainImage" src="img1.png">
-
-        <div class="heart-container" onclick="likeImage()">
-            <span id="heartIcon">♡</span>
-            <span id="heartCount">0</span>
-        </div>
-    </div>
-
-    <!-- MUSIC -->
-   <div class="music-player">
-
-    <!-- LEFT: ICON -->
-    <img class="track-icon" src="img1.png">
-
-    <!-- MIDDLE: INFO -->
-    <div class="track-info">
-        <div class="track-title">dream.exe</div>
-        <div class="track-artist">Neon Labs</div>
-
-        <!-- WAVEFORM -->
-        <div class="waveform">
-            <span></span><span></span><span></span><span></span><span></span>
-            <span></span><span></span><span></span><span></span><span></span>
+            <div class="heart-container" onclick="likeImage()">
+                <span id="heartIcon">♡</span>
+                <span id="heartCount">0</span>
+            </div>
         </div>
 
-        <!-- PROGRESS -->
-        <div class="progress">
-            <div class="progress-bar"></div>
-        </div>
-    </div>
+        <!-- MUSIC -->
+        <div class="music-player">
+            <!-- LEFT: ICON -->
+            <img class="track-icon" src="img1.png" alt="Thumbnail">
 
-    <!-- RIGHT CONTROLS -->
-    <div class="controls">
-        <button onclick="togglePlay()" id="playBtn">▶</button>
-        <button onclick="downloadTrack()">⬇</button>
+            <!-- MIDDLE: INFO -->
+            <div class="track-info">
+                <div class="track-title">dream.exe</div>
+                <div class="track-artist">Neon Labs</div>
+
+                <!-- WAVEFORM -->
+                <div class="waveform" id="waveform">
+                    <span></span><span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span><span></span>
+                </div>
+
+                <!-- PROGRESS -->
+                <div class="progress">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+            </div>
+
+            <!-- RIGHT CONTROLS -->
+            <div class="controls">
+                <button onclick="togglePlay()" id="playBtn">▶</button>
+                <button onclick="downloadTrack()">⬇</button>
+            </div>
+        </div>
     </div>
 
     <audio id="audio" src="dream.exe.mp3"></audio>
-</div>
     
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
