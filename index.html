@@ -3,17 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neon Byte | Media Player</title>
+    <title>Neon Byte | Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
     <style>
-        /* --- CSS: LAYOUT & INTERACTIVE STYLES --- */
+        /* --- 1. CSS: LAYOUT & ANIMATION --- */
         * { box-sizing: border-box; }
-        
         body {
             background-color: #05000a;
             color: #fff;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', Roboto, sans-serif;
             display: flex;
             justify-content: center;
             padding: 20px;
@@ -22,26 +20,52 @@
 
         .main-wrapper { width: 100%; max-width: 800px; }
 
-        /* TOP IMAGE SECTION */
-        .image-box {
+        /* --- THE SCROLLING GALLERY --- */
+        .gallery-container {
             position: relative;
             width: 100%;
             margin-bottom: 25px;
+            overflow: hidden; /* Clips the images */
+            border-radius: 15px;
         }
 
-        #mainImage {
+        .slider-wrapper {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
             width: 100%;
-            border-radius: 12px;
+        }
+
+        .slide {
+            min-width: 100%; /* Each image takes full width */
+            flex-shrink: 0;
+        }
+
+        .slide img {
+            width: 100%;
             display: block;
+            object-fit: cover;
+            aspect-ratio: 16 / 9; /* Ensures landscape orientation as requested */
         }
 
-        /* LIKE BUTTON STYLING */
-        .heart-container, .p-stats {
+        /* NAVIGATION ARROWS */
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
             cursor: pointer;
-            user-select: none;
-            transition: all 0.3s ease;
+            z-index: 10;
+            border-radius: 50%;
+            transition: background 0.3s;
         }
+        .nav-arrow:hover { background: #ff00ff; }
+        .prev-btn { left: 10px; }
+        .next-btn { right: 10px; }
 
+        /* PINNED HEART ON GALLERY */
         .heart-container {
             position: absolute;
             bottom: 20px;
@@ -49,22 +73,17 @@
             background: rgba(0, 0, 0, 0.85);
             padding: 8px 16px;
             border-radius: 25px;
-            border: 1.5px solid #444; /* Dimmed when not liked */
+            border: 1.5px solid #444;
             display: flex;
             align-items: center;
             gap: 10px;
             color: #888;
+            z-index: 15;
+            cursor: pointer;
+            transition: all 0.3s;
         }
 
-        /* THE "LIT UP" PURPLE STATE */
-        .liked {
-            color: #ff00ff !important;
-            border-color: #ff00ff !important;
-            text-shadow: 0 0 10px #ff00ff;
-            box-shadow: 0 0 15px rgba(255, 0, 255, 0.2);
-        }
-
-        /* PLAYER WIDGET */
+        /* PLAYER & PLAYLIST */
         .player-widget {
             background: #11001a;
             border: 1px solid #222;
@@ -81,24 +100,22 @@
 
         #playerTrackThumb {
             width: 75px; height: 75px;
-            border-radius: 10px; object-fit: cover;
-            flex-shrink: 0;
+            border-radius: 10px; object-fit: cover; flex-shrink: 0;
         }
 
         .track-meta { flex: 1; }
         .status-label { font-size: 11px; color: #ff00ff; text-transform: uppercase; }
         .track-name { font-weight: bold; font-size: 22px; margin: 4px 0; }
-        .artist-name { color: #888; font-size: 16px; }
 
         .button-group { display: flex; gap: 12px; }
         .action-btn {
             background: #ff00ff; border: none; color: white;
             width: 45px; height: 45px; border-radius: 12px;
-            cursor: pointer; font-size: 18px;
-            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; font-size: 18px; display: flex;
+            align-items: center; justify-content: center;
         }
 
-        /* PROGRESS BAR */
+        /* PROGRESS AREA */
         .progress-area { margin-bottom: 25px; }
         .progress-track {
             width: 100%; height: 6px; background: #2a1436;
@@ -110,10 +127,10 @@
         }
         .time-labels {
             display: flex; justify-content: space-between;
-            font-size: 13px; color: #777; margin-top: 8px;
+            font-size: 13px; color: #777; margin-top: 8px; font-family: monospace;
         }
 
-        /* PLAYLIST */
+        /* PLAYLIST FIX */
         .playlist-row {
             display: flex; align-items: center; gap: 15px;
             padding-top: 15px; border-top: 1px solid #222;
@@ -124,20 +141,33 @@
         }
         .p-info { flex: 1; }
         .p-stats {
-            font-size: 14px;
-            min-width: 80px;
-            text-align: right;
-            color: #888; /* Initial state */
+            font-size: 14px; min-width: 80px; text-align: right; color: #888;
+            cursor: pointer;
+        }
+
+        /* THE PURPLE "LIT" STATE */
+        .liked {
+            color: #ff00ff !important;
+            border-color: #ff00ff !important;
+            text-shadow: 0 0 10px #ff00ff;
         }
     </style>
 </head>
 <body>
 
 <div class="main-wrapper">
-    <!-- MAIN IMAGE & HEART -->
-    <div class="image-box">
-        <img id="mainImage" src="img1.png" alt="Neon Byte">
-        <div class="heart-container" onclick="handleLike(this, 'main')">
+    <!-- 2. HTML: THE GALLERY & PLAYER -->
+    <div class="gallery-container">
+        <button class="nav-arrow prev-btn" onclick="moveSlide(-1)">❮</button>
+        <button class="nav-arrow next-btn" onclick="moveSlide(1)">❯</button>
+        
+        <div class="slider-wrapper" id="slider">
+            <div class="slide"><img src="img1.png" alt="Neon Byte 1"></div>
+            <div class="slide"><img src="img2.png" alt="Neon Byte 2"></div>
+            <div class="slide"><img src="img3.png" alt="Neon Byte 3"></div>
+        </div>
+
+        <div class="heart-container" onclick="toggleLike(this, 'main')">
             <i class="far fa-heart"></i>
             <span id="mainCount">1149</span>
         </div>
@@ -149,7 +179,7 @@
             <div class="track-meta">
                 <div class="status-label">Now Playing</div>
                 <div class="track-name">dream.exe</div>
-                <div class="artist-name">Neon Byte</div>
+                <div class="artist-name" style="color: #888;">Neon Byte</div>
             </div>
             <div class="button-group">
                 <button class="action-btn" id="playBtn" onclick="togglePlay()">▶</button>
@@ -157,7 +187,6 @@
             </div>
         </div>
 
-        <!-- PROGRESS -->
         <div class="progress-area">
             <div class="progress-track" id="progressTrack" onclick="seek(event)">
                 <div class="progress-fill" id="progressBar"></div>
@@ -168,14 +197,13 @@
             </div>
         </div>
 
-        <!-- PLAYLIST HEART -->
         <div class="playlist-row">
             <img class="p-thumb" src="img1.png">
             <div class="p-info">
                 <div class="p-title">dream.exe</div>
-                <div class="p-artist" style="font-size: 12px; color: #666;">Neon Byte</div>
+                <div style="font-size: 12px; color: #666;">Neon Byte</div>
             </div>
-            <div class="p-stats" onclick="handleLike(this, 'playlist')">
+            <div class="p-stats" onclick="toggleLike(this, 'playlist')">
                 <i class="far fa-heart"></i> <span id="playlistCount">1175</span>
             </div>
         </div>
@@ -184,15 +212,28 @@
 
 <audio id="audio" src="dream.exe.mp3"></audio>
 
+<!-- 3. JAVASCRIPT: THE ALIGNED LOGIC -->
 <script>
+    /* SLIDER LOGIC */
+    let currentSlide = 0;
+    const slider = document.getElementById('slider');
+    const totalSlides = document.querySelectorAll('.slide').length;
+
+    function moveSlide(direction) {
+        currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+        slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+
+    // Auto-scroll every 5 seconds
+    setInterval(() => moveSlide(1), 5000);
+
+    /* AUDIO LOGIC */
     const audio = document.getElementById('audio');
     const playBtn = document.getElementById('playBtn');
     const progressBar = document.getElementById('progressBar');
-    const progressTrack = document.getElementById('progressTrack');
     const currentTimeEl = document.getElementById('currentTime');
     const totalTimeEl = document.getElementById('totalTime');
 
-    /* --- AUDIO LOGIC --- */
     function togglePlay() {
         if (audio.paused) {
             audio.play();
@@ -222,32 +263,26 @@
     }
 
     function seek(e) {
-        const width = progressTrack.clientWidth;
-        const clickX = e.offsetX;
-        audio.currentTime = (clickX / width) * audio.duration;
+        const width = document.getElementById('progressTrack').clientWidth;
+        audio.currentTime = (e.offsetX / width) * audio.duration;
     }
 
-    /* --- LIKE LOGIC (THE FIX) --- */
-    function handleLike(element, type) {
+    /* LIKE LOGIC (PURPLE LIGHT-UP) */
+    function toggleLike(element, type) {
         const icon = element.querySelector('i');
         const countSpan = element.querySelector('span');
-        let currentCount = parseInt(countSpan.innerText.replace(',', ''));
+        let count = parseInt(countSpan.innerText.replace(',', ''));
 
-        // Toggle the "liked" class for color and glow
         element.classList.toggle('liked');
 
         if (element.classList.contains('liked')) {
-            // Liked: Solid heart + add 1
             icon.classList.replace('far', 'fas');
-            currentCount++;
+            count++;
         } else {
-            // Unliked: Regular heart - subtract 1
             icon.classList.replace('fas', 'far');
-            currentCount--;
+            count--;
         }
-
-        // Update the text with a comma for the thousands
-        countSpan.innerText = currentCount.toLocaleString();
+        countSpan.innerText = count.toLocaleString();
     }
 </script>
 
