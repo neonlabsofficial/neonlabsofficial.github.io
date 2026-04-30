@@ -6,17 +6,23 @@ body {
     text-align: center;
 }
 
-/* NAV ARROWS */
+/* BIG TRANSLUCENT ARROWS */
 .nav-arrow {
     position: fixed;
     top: 50%;
-    font-size: 60px;
+    transform: translateY(-50%);
+    font-size: 100px;
     background: none;
     border: none;
     color: white;
+    opacity: 0.25;
     cursor: pointer;
-    transform: translateY(-50%);
     z-index: 10;
+    transition: 0.2s;
+}
+
+.nav-arrow:hover {
+    opacity: 0.8;
 }
 
 .nav-arrow.left {
@@ -52,11 +58,6 @@ body {
     gap: 8px;
 }
 
-#heartIcon {
-    transition: 0.2s;
-}
-
-/* NEON PURPLE */
 .liked {
     color: #b026ff;
     text-shadow: 0 0 8px #b026ff, 0 0 15px #b026ff;
