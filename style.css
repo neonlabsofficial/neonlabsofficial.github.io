@@ -67,3 +67,8 @@ body {
 .songs {
     padding: 20px;
 }
+.scroll-item:first-child img {
+  position: relative;
+  z-index: 2;
+  transform: scale(1.08);
+}
