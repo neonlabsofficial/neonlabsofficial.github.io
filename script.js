@@ -3,14 +3,78 @@ const visualizer = document.getElementById("visualizer");
 const playBtn = document.getElementById("playBtn");
 const progressBar = document.getElementById("progressBar");
 const progressTrack = document.getElementById("progressTrack");
-const currentTimeDisplay = document.getElementById("currentTime");
-const totalTimeDisplay = document.getElementById("totalTime");
 const mainImage = document.getElementById("mainImage");
 
 const images = ["img1.png", "img2.png", "img3.png", "img4.png", "img5.png"];
 let index = 0;
 
-// WAVEFORM GENERATION
+/**
+ * 1. MANUAL FIXED STARTING NUMBERS
+ * These are the numbers I have chosen for you.
+ */
+const manualStartingPoints = {
+    "img1.png": 1142,
+    "img2.png": 1085,
+    "img3.png": 1197,
+    "img4.png": 1023,
+    "img5.png": 1115,
+    "song_dream.exe": 1168
+};
+
+function getPersistentLikes(key, manualStart) {
+    const saved = localStorage.getItem(key);
+    if (saved !== null) {
+        return parseInt(saved);
+    } else {
+        // Use the manually chosen number and save it for the first time
+        localStorage.setItem(key, manualStart);
+        return manualStart;
+    }
+}
+
+// Initialize states from storage using the manual choices
+const imageLikes = {};
+images.forEach(img => {
+    imageLikes[img] = getPersistentLikes(`like_img_${img}`, manualStartingPoints[img]);
+});
+
+const songLikes = {
+    "dream.exe": getPersistentLikes("like_song_dream.exe", manualStartingPoints["song_dream.exe"])
+};
+
+/**
+ * 2. LIKE FUNCTIONS
+ */
+function likeImage() {
+    const currentImg = images[index];
+    imageLikes[currentImg]++;
+    localStorage.setItem(`like_img_${currentImg}`, imageLikes[currentImg]);
+    updateImageHeartUI();
+}
+
+function likeSong(title) {
+    if (songLikes[title] !== undefined) {
+        songLikes[title]++;
+        localStorage.setItem(`like_song_${title}`, songLikes[title]);
+        
+        document.getElementById(`count-${title}`).textContent = songLikes[title].toLocaleString();
+        const icon = document.getElementById(`heart-${title}`);
+        icon.classList.remove('far');
+        icon.classList.add('fas', 'liked');
+    }
+}
+
+function updateImageHeartUI() {
+    const currentImg = images[index];
+    document.getElementById("imageHeartCount").textContent = imageLikes[currentImg].toLocaleString();
+    const icon = document.querySelector("#imageHeartIcon i");
+    icon.classList.replace('far', 'fas');
+    icon.classList.add('liked');
+}
+
+/**
+ * 3. AUDIO VISUALIZER
+ */
 const barCount = 50;
 for (let i = 0; i < barCount; i++) {
     const bar = document.createElement("span");
@@ -18,9 +82,7 @@ for (let i = 0; i < barCount; i++) {
 }
 const bars = visualizer.querySelectorAll("span");
 
-// VISUALIZER SYNC LOGIC
 let audioCtx, analyser, dataArray;
-
 function initVisualizer() {
     if (audioCtx) return;
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -46,7 +108,17 @@ function renderFrame() {
     }
 }
 
-// CONTROLS
+/**
+ * 4. UI & SLIDESHOW
+ */
+window.onload = () => {
+    updateImageHeartUI();
+    for (let song in songLikes) {
+        const countEl = document.getElementById(`count-${song}`);
+        if (countEl) countEl.textContent = songLikes[song].toLocaleString();
+    }
+};
+
 function togglePlay() {
     if (audio.paused) {
         initVisualizer();
@@ -64,7 +136,6 @@ progressTrack.addEventListener("click", (e) => {
     }
 });
 
-// TIME SYNC
 function format(s) {
     const m = Math.floor(s / 60);
     const sec = Math.floor(s % 60);
@@ -72,35 +143,27 @@ function format(s) {
 }
 
 audio.addEventListener('timeupdate', () => {
-    currentTimeDisplay.textContent = format(audio.currentTime);
+    document.getElementById("currentTime").textContent = format(audio.currentTime);
     progressBar.style.width = (audio.currentTime / audio.duration * 100) + '%';
 });
 
 audio.addEventListener('loadedmetadata', () => {
     const t = format(audio.duration);
-    totalTimeDisplay.textContent = t;
+    document.getElementById("totalTime").textContent = t;
     document.getElementById("playlistDuration").textContent = t;
 });
 
-// SLIDESHOW
-function updateGallery() {
+setInterval(() => {
+    index = (index + 1) % images.length;
     mainImage.classList.add("fade-out");
     setTimeout(() => {
         mainImage.src = images[index];
         document.getElementById("playerTrackThumb").src = images[index];
+        updateImageHeartUI(); 
         mainImage.classList.remove("fade-out");
     }, 400);
-}
-
-setInterval(() => {
-    index = (index + 1) % images.length;
-    updateGallery();
 }, 5000);
 
-// NAV & LIKES
-function likeImage() { /* Add like logic here if needed */ }
-function goBack() { location.reload(); }
-function nextGroup() { console.log("Coming Soon"); }
 function downloadTrack() {
     const a = document.createElement("a");
     a.href = audio.src;
