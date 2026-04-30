@@ -13,13 +13,26 @@ let likes = JSON.parse(localStorage.getItem("likes")) || [0,0,0,0,0];
 let likedState = JSON.parse(localStorage.getItem("liked")) || [false,false,false,false,false];
 
 function showImage() {
-    document.getElementById("mainImage").src = images[index];
-    updateHeartUI();
+    const img = document.getElementById("mainImage");
+
+    img.classList.add("fade");
+
+    setTimeout(() => {
+        img.src = images[index];
+        img.classList.remove("fade");
+        updateHeartUI();
+    }, 150);
 }
 
 function nextImage() {
-    index = (index + 1) % images.length;
-    showImage();
+    const img = document.getElementById("mainImage");
+
+    img.classList.add("fade");
+
+    setTimeout(() => {
+        index = (index + 1) % images.length;
+        showImage();
+    }, 150);
 }
 
 setInterval(nextImage, 4000);
