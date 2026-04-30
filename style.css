@@ -1,21 +1,27 @@
-/* --- LAYOUT ADJUSTMENTS --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    background-color: #0c0015;
+    color: #fff;
+    font-family: 'Segoe UI', sans-serif;
+}
+
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 40px 0;
-    min-height: 100vh;
+    padding: 50px 0;
 }
 
+/* IMAGE SECTION */
 .image-box {
-    position: relative; /* Changed from fixed */
+    position: relative;
     width: 90%;
     max-width: 680px;
     height: 450px;
     margin-bottom: 30px;
     border-radius: 30px;
     overflow: hidden;
-    z-index: 1;
+    background: #000;
 }
 
 .image-box img {
@@ -25,8 +31,10 @@
     transition: opacity 0.3s ease;
 }
 
+.fade-out { opacity: 0; }
+
+/* PLAYER WIDGET */
 .player-widget {
-    position: relative;
     max-width: 680px;
     width: 90%;
     background: rgba(18, 1, 30, 0.8);
@@ -36,12 +44,45 @@
     padding: 30px;
 }
 
-/* Make the progress track look like a clickable area */
-.player-progress-track {
-    flex: 1;
-    height: 6px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-    position: relative;
-    cursor: pointer;
+.now-playing-section { display: flex; gap: 25px; margin-bottom: 30px; }
+.track-thumb-container { width: 120px; height: 120px; border-radius: 20px; overflow: hidden; flex-shrink: 0; }
+.track-thumb-container img { width: 100%; height: 100%; object-fit: cover; }
+.track-data-layout { flex: 1; display: flex; flex-direction: column; gap: 15px; }
+
+.now-playing-indicator { color: #ff00ff; font-size: 0.7rem; font-weight: bold; display: flex; align-items: center; gap: 5px; }
+.purple-dot { width: 6px; height: 6px; background: #ff00ff; border-radius: 50%; }
+.player-track-title { font-size: 1.8rem; font-weight: 800; }
+.player-track-artist { opacity: 0.6; }
+
+/* CONTROLS */
+.player-control-btn {
+    width: 60px; height: 60px; border-radius: 50%;
+    border: 1.5px solid #ff00ff; background: none; color: #ff00ff;
+    font-size: 24px; cursor: pointer; box-shadow: 0 0 15px #ff00ff;
 }
+
+/* PROGRESS BAR (Clickable) */
+.player-progress-track {
+    flex: 1; height: 6px; background: rgba(255,255,255,0.1);
+    border-radius: 4px; cursor: pointer; position: relative; margin: 10px 0;
+}
+.player-progress-bar-filled {
+    height: 100%; width: 0%; background: #ff00ff; box-shadow: 0 0 10px #ff00ff;
+}
+
+/* WAVEFORM */
+.player-waveform { height: 30px; display: flex; gap: 3px; align-items: flex-end; opacity: 0.4; }
+.player-waveform span { flex: 1; height: 5px; background: #ff00ff; border-radius: 2px; animation: wave 1.5s infinite ease-in-out; }
+@keyframes wave { 0%, 100% { height: 5px; } 50% { height: 25px; } }
+
+/* PLAYLIST */
+.playlist-section { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: left; }
+.download-trigger { color: #ff00ff; font-size: 0.8rem; font-weight: bold; cursor: pointer; margin-bottom: 15px; display: inline-block; }
+.playlist-item { display: flex; align-items: center; gap: 15px; padding: 10px; border-radius: 12px; background: rgba(255,255,255,0.03); }
+.p-thumb { width: 40px; height: 40px; border-radius: 5px; }
+.active-color { color: #ff00ff; font-weight: bold; }
+
+/* ARROWS */
+.page-nav-arrow { position: fixed; top: 50%; font-size: 50px; background: none; border: none; color: #fff; opacity: 0.2; cursor: pointer; }
+.page-nav-arrow.left { left: 20px; }
+.page-nav-arrow.right { right: 20px; }
