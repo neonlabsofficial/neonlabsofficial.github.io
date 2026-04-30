@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neon Byte | Media</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <!-- Versioning added to force refresh -->
+    <link rel="stylesheet" href="style.css?v=1.1">
 </head>
 <body>
 
@@ -13,7 +14,6 @@
         <!-- TOP GALLERY SECTION -->
         <div class="image-box">
             <img id="mainImage" src="img1.png" alt="Neon Byte">
-            <!-- Pinned counter inside the relative box -->
             <div class="heart-container" onclick="likeImage()">
                 <span id="imageHeartIcon"><i class="far fa-heart"></i></span>
                 <span id="imageHeartCount">0</span>
@@ -55,21 +55,18 @@
 
             <!-- PLAYLIST SECTION -->
             <div class="playlist-section">
-    <div class="playlist-item">
-        <!-- This is the image that was "huge" -->
-        <img class="p-thumb" src="img1.png" alt="Neon Byte Thumbnail">
-        
-        <div class="p-row-content">
-            <span class="p-title">dream.exe</span>
-            <span class="p-artist">Neon Byte</span>
-            
-            <div class="song-heart-btn" onclick="likeSong('dream.exe')">
-                <i class="far fa-heart" id="heart-dream.exe"></i>
-                <span id="count-dream.exe">0</span>
+                <div class="playlist-item">
+                    <img class="p-thumb" src="img1.png" alt="Thumbnail">
+                    <div class="p-row-content">
+                        <span class="p-title">dream.exe</span>
+                        <span class="p-artist">Neon Byte</span>
+                        <div class="song-heart-btn" onclick="likeSong('dream.exe')">
+                            <i class="far fa-heart" id="heart-dream.exe"></i>
+                            <span id="count-dream.exe">0</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</div>
         </div>
     </div>
 
