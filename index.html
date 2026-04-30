@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neon Byte | Media</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Versioning added to force refresh -->
-    <link rel="stylesheet" href="style.css?v=1.1">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="main-wrapper">
-        <!-- TOP GALLERY SECTION -->
+        <!-- TOP IMAGE SECTION -->
         <div class="image-box">
-            <img id="mainImage" src="img1.png" alt="Neon Byte">
+            <img id="mainImage" src="img1.png">
+            <!-- Fixed Counter -->
             <div class="heart-container" onclick="likeImage()">
                 <span id="imageHeartIcon"><i class="far fa-heart"></i></span>
                 <span id="imageHeartCount">0</span>
@@ -24,7 +24,7 @@
         <div class="player-widget">
             <div class="now-playing-section">
                 <div class="track-thumb-container">
-                    <img id="playerTrackThumb" src="img1.png" alt="Thumbnail">
+                    <img id="playerTrackThumb" src="img1.png">
                 </div>
 
                 <div class="track-data-layout">
@@ -40,6 +40,7 @@
                         </div>
                     </div>
 
+                    <!-- Progress & Visualizer -->
                     <div class="waveform-progress-data">
                         <div class="player-waveform" id="visualizer"></div>
                         <div class="player-progress-detailed">
@@ -56,7 +57,7 @@
             <!-- PLAYLIST SECTION -->
             <div class="playlist-section">
                 <div class="playlist-item">
-                    <img class="p-thumb" src="img1.png" alt="Thumbnail">
+                    <img class="p-thumb" src="img1.png">
                     <div class="p-row-content">
                         <span class="p-title">dream.exe</span>
                         <span class="p-artist">Neon Byte</span>
