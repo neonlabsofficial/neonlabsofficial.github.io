@@ -1,55 +1,89 @@
-/* Container for the whole playlist row */
-.playlist-item {
+/* Center everything on the screen */
+body {
+    background-color: #05000a;
+    color: #fff;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
     display: flex;
-    align-items: center;
-    padding: 10px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    margin-top: 15px;
-    overflow: hidden; /* Prevents anything from leaking out */
-    height: 70px; /* Fixed height for the row */
+    justify-content: center; /* Centers horizontally */
+    min-height: 100vh;
 }
 
-/* THE FIX: Specifically forces the bottom image to stay small */
+.main-wrapper {
+    width: 100%;
+    max-width: 900px; /* Keeps the site from getting too wide */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+/* TOP GALLERY - Fixed height to prevent jumping */
+.image-box {
+    position: relative; 
+    width: 100%;
+    height: 500px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    background: #000;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+#mainImage {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* PINNED COUNTER - Stays in one spot */
+.heart-container {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px 15px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    border: 1px solid #ff00ff;
+    z-index: 10;
+}
+
+/* BOTTOM IMAGE - Strict size fix */
 .p-thumb {
     width: 50px !important;
     height: 50px !important;
-    min-width: 50px; /* Prevents shrinking */
-    min-height: 50px;
-    object-fit: cover; /* Crops the image into a perfect square */
-    border-radius: 6px;
-    display: block;
+    min-width: 50px;
+    object-fit: cover;
+    border-radius: 8px;
     flex-shrink: 0;
 }
 
-/* Keeps the text row organized and prevents it from jumping */
+/* PLAYER LAYOUT */
+.player-widget {
+    width: 100%;
+    background: rgba(20, 0, 30, 0.95);
+    border-radius: 30px;
+    padding: 25px;
+    border: 1px solid rgba(255, 0, 255, 0.2);
+}
+
+.playlist-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+}
+
 .p-row-content {
     display: flex;
     align-items: center;
     flex: 1;
-    justify-content: space-between;
-    margin-left: 15px;
-    white-space: nowrap; /* Keeps everything on one line */
 }
 
-.p-title {
-    font-weight: bold;
-    color: #ff00ff;
-    margin-right: 10px;
-}
-
-.p-artist {
-    color: #888;
-    font-size: 0.9rem;
-    flex-grow: 1;
-}
-
-/* Keeps the song like counter pinned on the right */
-.song-heart-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    min-width: 70px;
-    justify-content: flex-end;
-    cursor: pointer;
-}
+.p-artist { margin-right: auto; color: #888; padding-left: 10px; }
