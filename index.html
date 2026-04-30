@@ -9,11 +9,12 @@
 </head>
 <body>
 
+    <!-- NAV ARROWS -->
     <button class="page-nav-arrow left" onclick="goBack()">❮</button>
     <button class="page-nav-arrow right" onclick="nextGroup()">❯</button>
 
     <div class="container">
-        <!-- IMAGE BOX: Now larger and uncropped -->
+        <!-- LARGE UNCHOPPED GALLERY -->
         <div class="image-box">
             <img id="mainImage" src="img1.png" alt="Featured Art">
             <div class="heart-container" onclick="likeImage()">
@@ -22,7 +23,7 @@
             </div>
         </div>
 
-        <!-- PLAYER WIDGET -->
+        <!-- PLAYER WIDGET (Underneath) -->
         <div class="player-widget">
             <div class="now-playing-section">
                 <div class="track-thumb-container">
@@ -36,14 +37,12 @@
                             <div class="player-track-title">dream.exe</div>
                             <div class="player-track-artist">Neon Labs</div>
                         </div>
-                        <button class="player-control-btn play-pause-btn" id="playBtn" onclick="togglePlay()">▶</button>
+                        <button class="player-control-btn" id="playBtn" onclick="togglePlay()">▶</button>
                     </div>
 
                     <div class="waveform-progress-data">
-                        <!-- SCRIPTED WAVEFORM -->
-                        <div class="player-waveform" id="visualizer">
-                            <!-- JS will generate bars here for better sync -->
-                        </div>
+                        <!-- REAL-TIME SYNCED WAVEFORM -->
+                        <div class="player-waveform" id="visualizer"></div>
 
                         <div class="player-progress-detailed">
                             <span id="currentTime">0:00</span>
@@ -56,6 +55,7 @@
                 </div>
             </div>
 
+            <!-- PLAYLIST SECTION -->
             <div class="playlist-section">
                 <div class="playlist-header">
                     <div class="download-trigger" onclick="downloadTrack()">
@@ -65,6 +65,7 @@
                 </div>
 
                 <div class="playlist-item active-track">
+                    <!-- FIXED: Small thumbnail style applied here -->
                     <img class="p-thumb" src="img1.png" alt="track thumb">
                     <i class="fas fa-bars-staggered purple-track-icon"></i>
                     <span class="p-title active-color">dream.exe</span>
