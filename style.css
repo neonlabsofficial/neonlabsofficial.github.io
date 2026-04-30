@@ -1,9 +1,8 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
-    background-color: #000; /* Pure black background */
+    background-color: #000;
     color: #fff;
     font-family: 'Segoe UI', sans-serif;
-    overflow-x: hidden;
 }
 
 .container {
@@ -13,23 +12,22 @@ body {
     width: 100%;
 }
 
-/* BIGGER GALLERY: No cropping */
+/* BIG GALLERY - NO CROPPING */
 .image-box {
     position: relative;
     width: 100%;
-    height: 80vh; /* Takes up most of the screen */
+    height: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #000;
     margin-bottom: 20px;
 }
 
 .image-box img {
     max-width: 95%;
     max-height: 95%;
-    object-fit: contain; /* Ensures the whole image is visible */
-    transition: opacity 0.4s ease-in-out;
+    object-fit: contain; /* The "no cropping" magic */
+    transition: opacity 0.4s ease;
 }
 
 .fade-out { opacity: 0; }
@@ -38,67 +36,64 @@ body {
 .player-widget {
     max-width: 800px;
     width: 90%;
-    background: rgba(20, 0, 35, 0.85);
-    backdrop-filter: blur(25px);
-    border: 1px solid rgba(255, 0, 255, 0.15);
-    border-radius: 40px;
-    padding: 35px;
-    margin-bottom: 50px;
+    background: rgba(15, 0, 25, 0.9);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 0, 255, 0.1);
+    border-radius: 35px;
+    padding: 30px;
+    margin-bottom: 60px;
 }
 
-.now-playing-section { display: flex; gap: 30px; margin-bottom: 30px; }
-.track-thumb-container { width: 140px; height: 140px; border-radius: 20px; overflow: hidden; flex-shrink: 0; }
+.now-playing-section { display: flex; gap: 25px; margin-bottom: 25px; align-items: center; }
+
+/* FIXED: Player Thumbnail Size */
+.track-thumb-container { width: 120px; height: 120px; border-radius: 15px; overflow: hidden; flex-shrink: 0; }
 .track-thumb-container img { width: 100%; height: 100%; object-fit: cover; }
+
 .track-data-layout { flex: 1; display: flex; flex-direction: column; gap: 10px; }
-
-.now-playing-indicator { color: #ff00ff; font-size: 0.75rem; font-weight: bold; letter-spacing: 1px; }
-.player-track-title { font-size: 2.2rem; font-weight: 800; }
-
-/* CONTROLS */
-.player-control-btn {
-    width: 70px; height: 70px; border-radius: 50%;
-    border: 2px solid #ff00ff; background: none; color: #ff00ff;
-    font-size: 28px; cursor: pointer; box-shadow: 0 0 20px rgba(255, 0, 255, 0.4);
-    transition: 0.2s;
-}
-.player-control-btn:hover { transform: scale(1.05); background: rgba(255, 0, 255, 0.1); }
+.player-track-title { font-size: 2rem; font-weight: 800; }
 
 /* WAVEFORM VISUALIZER */
 .player-waveform {
-    height: 50px;
+    height: 40px;
     display: flex;
     align-items: center;
     gap: 3px;
-    overflow: hidden;
 }
 .player-waveform span {
     flex: 1;
-    width: 4px;
-    background: linear-gradient(to top, #6a00ff, #ff00ff);
+    background: #ff00ff;
     border-radius: 2px;
     min-height: 2px;
-    transition: height 0.05s ease; /* Smooth sync */
+    transition: height 0.05s ease;
 }
 
 /* PROGRESS BAR */
 .player-progress-track {
     flex: 1; height: 6px; background: rgba(255,255,255,0.1);
-    border-radius: 10px; cursor: pointer; position: relative; margin: 15px 0;
+    border-radius: 10px; cursor: pointer; position: relative; margin: 10px 0;
 }
-.player-progress-bar-filled {
-    height: 100%; width: 0%; background: #ff00ff; box-shadow: 0 0 15px #ff00ff;
+.player-progress-bar-filled { height: 100%; width: 0%; background: #ff00ff; box-shadow: 0 0 10px #ff00ff; }
+
+/* PLAYLIST & FIXED THUMBNAILS */
+.playlist-section { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+.playlist-item { display: flex; align-items: center; gap: 15px; padding: 12px; border-radius: 15px; background: rgba(255,255,255,0.03); }
+
+/* FIXED: Small Playlist Image (was making things look "huge") */
+.p-thumb { 
+    width: 50px !important; 
+    height: 50px !important; 
+    border-radius: 8px; 
+    object-fit: cover; 
 }
 
-/* PERSISTENT LIKE/NAV */
-.heart-container {
-    position: absolute; bottom: 20px; right: 30px; font-size: 32px;
-    cursor: pointer; background: rgba(0,0,0,0.5); padding: 10px 20px; border-radius: 30px;
+/* UI ELEMENTS */
+.player-control-btn {
+    width: 65px; height: 65px; border-radius: 50%; border: 2px solid #ff00ff; 
+    background: none; color: #ff00ff; font-size: 24px; cursor: pointer;
 }
-.page-nav-arrow { position: fixed; top: 50%; transform: translateY(-50%); font-size: 60px; color: #fff; opacity: 0.1; background: none; border: none; cursor: pointer; z-index: 100; }
+.heart-container { position: absolute; bottom: 20px; right: 30px; font-size: 28px; cursor: pointer; }
+.page-nav-arrow { position: fixed; top: 50%; font-size: 50px; color: #fff; opacity: 0.15; background: none; border: none; cursor: pointer; }
 .page-nav-arrow:hover { opacity: 0.7; }
-.page-nav-arrow.left { left: 30px; }
-.page-nav-arrow.right { right: 30px; }
-
-/* PLAYLIST */
-.playlist-section { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 25px; }
-.playlist-item { display: flex; align-items: center; gap: 20px; padding: 15px; border-radius: 15px; background: rgba(255,255,255,0.03); }
+.page-nav-arrow.left { left: 20px; }
+.page-nav-arrow.right { right: 20px; }
