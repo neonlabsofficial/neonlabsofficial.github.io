@@ -11,10 +11,11 @@
                     <div class="player-track-title">dream.exe</div>
                     <div class="player-track-artist">Neon Labs</div>
                 </div>
-                <!-- Controls Group: Play and Download together -->
                 <div class="player-controls-group">
                     <button class="player-control-btn" id="playBtn" onclick="togglePlay()">▶</button>
-                    <button class="player-mini-btn" onclick="downloadTrack()"><i class="fas fa-download"></i></button>
+                    <button class="player-mini-btn" onclick="downloadTrack()" title="Download Song">
+                        <i class="fas fa-download"></i>
+                    </button>
                 </div>
             </div>
 
@@ -31,7 +32,7 @@
         </div>
     </div>
 
-    <!-- PLAYLIST SECTION (Flattened to one line) -->
+    <!-- PLAYLIST SECTION -->
     <div class="playlist-section">
         <div class="playlist-item active-track">
             <img class="p-thumb" src="img1.png" alt="thumb">
