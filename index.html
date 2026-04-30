@@ -1,50 +1,78 @@
-<div class="player-widget">
-    <div class="now-playing-section">
-        <div class="track-thumb-container">
-            <img id="playerTrackThumb" src="img1.png" alt="Thumbnail">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Byte | Media</title>
+    <!-- Essential for the heart icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="main-wrapper">
+        <!-- GALLERY SECTION -->
+        <div class="image-box">
+            <img id="mainImage" src="img1.png" alt="Neon Byte">
+            <div class="heart-container" onclick="likeImage()">
+                <span id="imageHeartIcon"><i class="far fa-heart"></i></span>
+                <span id="imageHeartCount">0</span>
+            </div>
         </div>
 
-        <div class="track-data-layout">
-            <div class="track-data-top">
-                <div class="track-info-titles">
-                    <span class="now-playing-indicator"><span class="purple-dot"></span> NOW PLAYING</span>
-                    <div class="player-track-title">dream.exe</div>
-                    <div class="player-track-artist">Neon Labs</div>
+        <!-- PLAYER SECTION -->
+        <div class="player-widget">
+            <div class="now-playing-section">
+                <div class="track-thumb-container">
+                    <img id="playerTrackThumb" src="img1.png" alt="Thumbnail">
                 </div>
-                <div class="player-controls-group">
-                    <button class="player-control-btn" id="playBtn" onclick="togglePlay()">▶</button>
-                    <button class="player-mini-btn" onclick="downloadTrack()" title="Download Song">
-                        <i class="fas fa-download"></i>
-                    </button>
-                </div>
-            </div>
 
-            <div class="waveform-progress-data">
-                <div class="player-waveform" id="visualizer"></div>
-                <div class="player-progress-detailed">
-                    <span id="currentTime">0:00</span>
-                    <div class="player-progress-track" id="progressTrack">
-                        <div class="player-progress-bar-filled" id="progressBar"></div>
+                <div class="track-data-layout">
+                    <div class="track-data-top">
+                        <div class="track-info-titles">
+                            <span class="now-playing-indicator"><span class="purple-dot"></span> NOW PLAYING</span>
+                            <div class="player-track-title">dream.exe</div>
+                            <div class="player-track-artist">Neon Byte</div>
+                        </div>
+                        <div class="player-controls-group">
+                            <button class="player-control-btn" id="playBtn" onclick="togglePlay()">▶</button>
+                            <button class="player-mini-btn" onclick="downloadTrack()">
+                                <i class="fas fa-download"></i>
+                            </button>
+                        </div>
                     </div>
-                    <span id="totalTime">0:00</span>
+
+                    <div class="waveform-progress-data">
+                        <div class="player-waveform" id="visualizer"></div>
+                        <div class="player-progress-detailed">
+                            <span id="currentTime">0:00</span>
+                            <div class="player-progress-track" id="progressTrack">
+                                <div class="player-progress-bar-filled" id="progressBar"></div>
+                            </div>
+                            <span id="totalTime">0:00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="playlist-section">
+                <div class="playlist-item">
+                    <img class="p-thumb" src="img1.png" alt="thumb">
+                    <div class="p-row-content">
+                        <span class="p-title">dream.exe</span>
+                        <span class="p-artist">Neon Byte</span>
+                        <span class="p-duration" id="playlistDuration">0:00</span>
+                        <div class="song-heart-btn" onclick="likeSong('dream.exe')">
+                            <i class="far fa-heart" id="heart-dream.exe"></i>
+                            <span id="count-dream.exe">0</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- PLAYLIST SECTION -->
-    <div class="playlist-section">
-        <div class="playlist-item active-track">
-            <img class="p-thumb" src="img1.png" alt="thumb">
-            <div class="p-row-content">
-                <span class="p-title active-color">dream.exe</span>
-                <span class="p-artist grey-color">Neon Labs</span>
-                <span class="p-duration grey-color" id="playlistDuration">0:00</span>
-                <div class="song-heart-btn" onclick="likeSong('dream.exe')">
-                    <i class="far fa-heart" id="heart-dream.exe"></i>
-                    <span id="count-dream.exe">0</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    <audio id="audio" src="dream.exe.mp3" crossorigin="anonymous"></audio>
+    <script src="script.js"></script>
+</body>
+</html>
