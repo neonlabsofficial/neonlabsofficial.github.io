@@ -1,51 +1,39 @@
-// ... (previous variables remain the same)
+// ... [Keep your existing variable declarations and manualStartingPoints]
 
-// EXAGGERATED VISUALIZER LOGIC
+// EXAGGERATED VISUALIZER
 function renderFrame() {
     requestAnimationFrame(renderFrame);
     if (!audio.paused && analyser) {
         analyser.getByteFrequencyData(dataArray);
         for (let i = 0; i < barCount; i++) {
-            // Increased the multiplier from 40 to 80 for more "jump"
-            // and added a Math.pow to make peaks pop more
-            let intensity = dataArray[i] / 255;
-            const h = Math.pow(intensity, 1.5) * 85; 
-            bars[i].style.height = `${Math.max(3, h)}px`;
+            // Increased multiplier and added a boost for more movement
+            let value = dataArray[i];
+            let percent = value / 255;
+            let height = Math.pow(percent, 1.2) * 90; // Exaggerated height
+            bars[i].style.height = `${Math.max(2, height)}px`;
         }
     } else {
-        bars.forEach(b => b.style.height = "3px");
+        bars.forEach(b => b.style.height = "2px");
     }
 }
 
-// FIXED DOWNLOAD FUNCTION (Force download via Blob)
+// FIXED DOWNLOAD (Uses blob to bypass browser restrictions)
 async function downloadTrack() {
-    const songUrl = audio.src;
     try {
-        const response = await fetch(songUrl);
+        const response = await fetch(audio.src);
         const blob = await response.blob();
         const url = window.URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.style.display = "none";
-        a.href = url;
-        a.download = "dream_exe.mp3"; 
-        document.body.appendChild(a);
-        a.click();
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "dream_exe.mp3";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
         window.URL.revokeObjectURL(url);
-    } catch (error) {
-        console.error("Download failed:", error);
-        // Fallback for simple local testing
-        const a = document.createElement("a");
-        a.href = songUrl;
-        a.download = "dream_exe.mp3";
-        a.click();
+    } catch (e) {
+        // Simple fallback
+        window.open(audio.src, '_blank');
     }
 }
 
-// Ensure duration shows up correctly on load
-audio.addEventListener('loadedmetadata', () => {
-    const t = format(audio.duration);
-    document.getElementById("totalTime").textContent = t;
-    document.getElementById("playlistDuration").textContent = t;
-});
-
-// ... (rest of your like/slideshow logic remains as before)
+// ... [Keep your like logic, user_voted checks, and slideshow code]
