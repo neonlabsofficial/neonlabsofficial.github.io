@@ -1,70 +1,132 @@
-/* Player Controls */
-.player-controls-group {
+body {
+    background-color: #05000a;
+    color: #fff;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
     display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.player-mini-btn {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid #ff00ff;
-    color: #ff00ff;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
     justify-content: center;
-    transition: 0.3s;
+    overflow-x: hidden;
 }
 
-.player-mini-btn:hover {
-    background: #ff00ff;
-    color: #000;
-    box-shadow: 0 0 15px #ff00ff;
+.main-wrapper {
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
 }
 
-/* One-Line Playlist Logic */
-.playlist-item {
+/* Image Box Fix */
+.image-box {
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.image-box img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(188, 19, 254, 0.2);
+}
+
+/* Player Widget */
+.player-widget {
+    width: 100%;
+    background: rgba(20, 0, 30, 0.95);
+    border: 1px solid rgba(255, 0, 255, 0.2);
+    border-radius: 30px;
+    padding: 25px;
+    box-sizing: border-box;
+}
+
+.now-playing-section {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.track-thumb-container {
+    width: 100px;
+    height: 100px;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.track-thumb-container img { width: 100%; height: 100%; object-fit: cover; }
+
+.track-data-layout { flex: 1; }
+
+.track-data-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.player-track-title { font-size: 1.5rem; font-weight: bold; color: #ff00ff; }
+
+/* Visualizer Bars */
+.player-waveform {
+    height: 50px;
     display: flex;
     align-items: center;
-    padding: 10px 15px;
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 12px;
+    gap: 3px;
+    margin: 10px 0;
 }
 
+.player-waveform span {
+    flex: 1;
+    background: #ff00ff;
+    min-height: 3px;
+    transition: height 0.05s ease;
+}
+
+/* Playlist One-Line */
 .p-row-content {
     display: flex;
     align-items: center;
     flex: 1;
-    gap: 20px;
+    gap: 15px;
     margin-left: 15px;
 }
 
-.p-title { font-weight: bold; white-space: nowrap; }
-.p-artist { color: #888; white-space: nowrap; }
-
-/* This pushes the time and heart to the far right */
-.p-duration { 
-    margin-left: auto; 
-    font-family: monospace;
-}
+.p-artist { margin-right: auto; color: #888; }
 
 .song-heart-btn {
     display: flex;
     align-items: center;
-    gap: 6px;
-    min-width: 80px;
-    justify-content: flex-end;
+    gap: 8px;
+    color: #ff00ff;
+    cursor: pointer;
 }
 
-/* Exaggerated Visualizer Bars */
-.player-waveform span {
-    flex: 1;
-    background: #ff00ff;
-    min-height: 2px;
-    border-radius: 1px;
-    /* Keeps movement smooth but fast */
-    transition: height 0.04s ease-out; 
+.fa-heart.liked { color: #ff00ff; font-weight: 900; }
+
+/* Controls */
+.player-control-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #ff00ff;
+    background: none;
+    color: #ff00ff;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.player-mini-btn {
+    background: none;
+    border: 1px solid rgba(255,0,255,0.5);
+    color: #ff00ff;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
 }
